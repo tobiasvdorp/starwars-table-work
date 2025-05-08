@@ -17,11 +17,14 @@ type CardProps = {
 };
 
 export default function Card({ character }: CardProps) {
-  const { uid, name, url } = character;
+  const { uid, name } = character;
   return (
-    <Link href={`/characters/${uid}-${name}`} className="card text-center">
-      <h5>{name.charAt(0)}</h5>
-      <p>{name}</p>
+    <Link
+      href={`/characters/${uid}-${name}`}
+      className="card text-center p-20 flex flex-col items-center justify-center gap-y-10"
+    >
+      <h5 className="text-5xl font-bold">{name.charAt(0)}</h5>
+      <p className="text-2xl">{name}</p>
     </Link>
   );
 }
