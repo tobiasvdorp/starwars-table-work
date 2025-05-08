@@ -64,7 +64,7 @@ export default function CharacterPage({
   if (isError) return <div>Error loading character data</div>;
 
   return (
-    <div className="min-h-screen bg-[#fde68a] p-8">
+    <div className="min-h-screen p-8">
       <div className="max-w-7xl mx-auto">
         <Header />
         <CharacterDetails character={characterData} />
