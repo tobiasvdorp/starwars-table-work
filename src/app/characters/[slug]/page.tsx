@@ -4,6 +4,51 @@ import { useApiCharacter } from "@/hooks/useApiCharacter";
 import { Character } from "@/components/card";
 import Loading from "@/components/loading";
 
+type CharacterAttributeProps = {
+  title: string;
+  value: string;
+};
+
+function CharacterAttribute({ title, value }: CharacterAttributeProps) {
+  return (
+    <div>
+      <h3 className="text-2xl font-bold text-black">{title}</h3>
+      <p className="text-xl capitalize">{value}</p>
+    </div>
+  );
+}
+
+function Header() {
+  return (
+    <div className="mb-4">
+      <h1 className="text-5xl font-bold text-black">Star Wars</h1>
+      <h2 className="text-5xl font-bold text-black">Universe.</h2>
+    </div>
+  );
+}
+
+function CharacterDetails({ character }: { character: Character }) {
+  return (
+    <div className="flex flex-col md:flex-row pt-24 flex-wrap gap-x-4 justify-between">
+      <div className="md:w-fit">
+        <h1 className="text-8xl font-black text-black mb-4">
+          {character.name}
+        </h1>
+      </div>
+
+      <div className="md:w-fit mt-12 md:mt-0">
+        <div className="space-y-6">
+          <CharacterAttribute title="Birth year" value={character.birth_year} />
+          <CharacterAttribute title="Hair" value={character.hair_color} />
+          <CharacterAttribute title="Eyes" value={character.eye_color} />
+          <CharacterAttribute title="Mass" value={character.mass} />
+          <CharacterAttribute title="Skin" value={character.skin_color} />
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function CharacterPage({
   params,
 }: {
@@ -19,43 +64,10 @@ export default function CharacterPage({
   if (isError) return <div>Error loading character data</div>;
 
   return (
-    <div className="grid place-items-center min-h-screen p-4 sm:p-8">
-      <div className="bg-primary rounded-lg shadow-lg p-4 sm:p-8 w-full max-w-2xl">
-        <h1 className="text-2xl sm:text-4xl font-bold text-center mb-4 sm:mb-8 text-gray-800">
-          {characterData.name}
-        </h1>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
-          <div className="bg-gray-50 p-3 sm:p-4 rounded">
-            <p className="text-gray-600 font-semibold">Height</p>
-            <p className="text-gray-800">{characterData.height} cm</p>
-          </div>
-          <div className="bg-gray-50 p-3 sm:p-4 rounded">
-            <p className="text-gray-600 font-semibold">Mass</p>
-            <p className="text-gray-800">{characterData.mass} kg</p>
-          </div>
-          <div className="bg-gray-50 p-3 sm:p-4 rounded">
-            <p className="text-gray-600 font-semibold">Hair Color</p>
-            <p className="text-gray-800 capitalize">
-              {characterData.hair_color}
-            </p>
-          </div>
-          <div className="bg-gray-50 p-3 sm:p-4 rounded">
-            <p className="text-gray-600 font-semibold">Skin Color</p>
-            <p className="text-gray-800 capitalize">
-              {characterData.skin_color}
-            </p>
-          </div>
-          <div className="bg-gray-50 p-3 sm:p-4 rounded">
-            <p className="text-gray-600 font-semibold">Eye Color</p>
-            <p className="text-gray-800 capitalize">
-              {characterData.eye_color}
-            </p>
-          </div>
-          <div className="bg-gray-50 p-3 sm:p-4 rounded">
-            <p className="text-gray-600 font-semibold">Birth Year</p>
-            <p className="text-gray-800">{characterData.birth_year}</p>
-          </div>
-        </div>
+    <div className="min-h-screen bg-[#fde68a] p-8">
+      <div className="max-w-7xl mx-auto">
+        <Header />
+        <CharacterDetails character={characterData} />
       </div>
     </div>
   );
